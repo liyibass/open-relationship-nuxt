@@ -1,0 +1,16 @@
+[
+  {
+    "name": "people",
+    "path": "/people",
+    "component": "/Users/mac/Documents/mirror-media/open-relationship-nuxt/src/pages/people/index.vue",
+    "chunkName": "pages/people/index",
+    "_name": "_ccb555d0"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/mac/Documents/mirror-media/open-relationship-nuxt/src/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_81139008"
+  }
+]
