@@ -1,5 +1,12 @@
 [
   {
+    "name": "organization",
+    "path": "/organization",
+    "component": "/Users/mac/Documents/mirror-media/open-relationship-nuxt/src/pages/organization/index.vue",
+    "chunkName": "pages/organization/index",
+    "_name": "_4ad18f88"
+  },
+  {
     "name": "people",
     "path": "/people",
     "component": "/Users/mac/Documents/mirror-media/open-relationship-nuxt/src/pages/people/index.vue",

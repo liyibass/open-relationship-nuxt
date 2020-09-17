@@ -7,33 +7,6 @@
       https://www.facebook.com/readr.tw/ 我們會有專人為你解答 謝謝你的參與！
     </p>
 
-    <!-- <div class="fieldBlock">
-      <h5>請選擇您這次要填寫的欄位：</h5>
-
-      <form action>
-        <input type="checkbox" value="alternative_name" v-·model="fieldList" />
-        <label>別名</label>
-        <input type="checkbox" value="former_name" v-model="fieldList" />
-        <label>性別</label>
-        <input type="checkbox" value="identifiers" v-model="fieldList" />
-        <label>出生日期</label>
-        <input type="checkbox" value="email" v-model="fieldList" />
-        <label>email</label>
-        <input type="checkbox" value="gender" v-model="fieldList" />
-        <label>性別</label>
-
-        <input type="checkbox" value="birth_date" v-model="fieldList" />
-        <label>出生日期</label>
-        <input type="checkbox" value="death_date" v-model="fieldList" />
-        <label>死亡日期</label>
-        <input type="checkbox" value="image" v-model="fieldList" />
-        <label>圖片</label>
-
-        <input type="checkbox" value="national_identity" v-model="fieldList" />
-        <label>email</label>
-      </form>
-    </div> -->
-
     <form action v-on:submit.prevent="checkForm">
       <div class="fieldBlock">
         <h5>人物的姓名</h5>
@@ -142,6 +115,7 @@ export default {
   },
   methods: {
     async checkForm() {
+      // destructure character field
       const {
         name,
         alternative_name,
