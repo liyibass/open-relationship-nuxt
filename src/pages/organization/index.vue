@@ -1,6 +1,6 @@
 <template>
   <div class="pplPage container main-container">
-    <h1>新增人物資料表單</h1>
+    <h1>新增組織資料表單</h1>
     <p>
       這是新增台灣政商人物資料的表單 歡迎大家花費 5-10 分鐘的時間幫忙填寫資料
       如果有任何問題 歡迎來信 readr@readr.tw 或是私訊粉專
@@ -8,49 +8,10 @@
     </p>
 
     <form action v-on:submit.prevent="checkForm">
-      <div class="fieldBlock">
-        <h5>人物的姓名</h5>
-        <p>作答示範：原住民名字中間使用半形空格，例：Walis Nokan</p>
-        <input type="text" v-model="character.name" />
-      </div>
-
-      <div class="fieldBlock">
-        <h5>人物是否有其他名字</h5>
-        <input type="text" v-model="character.alternative_name" />
-      </div>
-
-      <div class="fieldBlock">
-        <h5>人物是否有其他別稱</h5>
-        <input type="text" v-model="character.former_name" />
-      </div>
-
-      <div class="fieldBlock">
-        <h5>人物的生理性別</h5>
-        <input
-          type="radio"
-          name="gender"
-          value="female"
-          v-model="character.gender"
-        />
-        <label>女</label>
-        <input
-          type="radio"
-          name="gender"
-          value="male"
-          v-model="character.gender"
-        />
-        <label>男</label>
-      </div>
-
-      <div class="fieldBlock">
-        <h5>人物的電子信箱</h5>
-        <p>作答示範：readr123@gmail.com</p>
-        <input type="email" v-model="character.email" />
-      </div>
-
-      <div class="fieldBlock">
-        <h5>資料來源</h5>
-        <p>作答示範：www.readr.tw</p>
+      <div v-for="field in organization" :key="field.label" class="fieldBlock">
+        <h5>{{ field.label }}</h5>
+        <p>{{ field.info }}</p>
+        <input :type="field.inputStatus.type" v-model="field.value" />
       </div>
 
       <div class="fieldBlock">
@@ -84,27 +45,103 @@
 <script>
 import axios from "axios";
 import { graphql } from "../../../graphQL/graphql.util";
-import { ADD_PPL } from "../../../graphQL/graphql.types";
+import { ADD_ORGANIZATION } from "../../../graphQL/graphql.types";
 
 export default {
   data() {
     return {
-      fieldList: [],
-      character: {
-        name: "",
-        alternative_name: "",
-        former_name: "",
-        identifiers: "",
-        email: "",
-        gender: "",
-        birth_date: "",
-        death_date: "",
-        image: "",
-        summary: "",
-        biography: "",
-        national_identity: "",
-        //contact_details: { label: "contact_details", type: Relationship, many: false, ref: 'Contact_detail' },
-        links: "",
+      organization: {
+        name: {
+          label: "名稱",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        alternative_name: {
+          label: "其他名稱",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        identifiers: {
+          label: "ID（統編）",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        classification: {
+          label: "類型",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        parent: {
+          label: "上層組織",
+          info: "",
+          value: {},
+          inputStatus: { type: "text" },
+        },
+        children: {
+          label: "附屬組織",
+          info: "",
+          value: {},
+          inputStatus: { type: "text" },
+        },
+        abstract: {
+          label: "概述",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        description: {
+          label: "描述",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        founding_date: {
+          label: "成立日期",
+          info: "",
+          value: "",
+          inputStatus: { type: "date" },
+        },
+        dissolution_date: {
+          label: "解散日期",
+          info: "",
+          value: "",
+          inputStatus: { type: "date" },
+        },
+        image: {
+          label: "照片連結",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        contact_details: {
+          label: "聯絡人",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        links: {
+          label: "相關連結",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        speeches: {
+          label: "相關演說",
+          info: "",
+          value: "",
+          inputStatus: { type: "text" },
+        },
+        //area: { label: "地區", type: Relationship, many: false, ref: 'Area' },
+        //memberships: { label: "成員", type: Relationship, many: true, ref: 'Membership' },
+        //posts: { label: "posts", type: Relationship, many: true, ref: 'Post' },
+        //motions: { label: "發起活動", type: Relationship, many: true, ref: 'Motion' },
+        //vote_events: { label: "選舉/投票", type: Relationship, many: true, ref: 'Vote_event' },
+        //votes: { label: "votes", type: Relationship, many: true, ref: 'Vote' },
+        //identifiers: { label: "identifiers", type: Relationship, many: false, ref: 'User',  isRequired: true},
       },
       editor: {
         name: "",
@@ -119,24 +156,42 @@ export default {
       const {
         name,
         alternative_name,
-        former_name,
-        email,
-        gender,
-      } = this.character;
-      await graphql(ADD_PPL, {
-        name,
-        alternative_name,
-        former_name,
-        email,
-        gender,
-        // identifiers: this.character.identifiers,
-        // birth_date: this.character.birth_date,
-        // death_date: this.character.death_date,
-        // image: this.character.image,
-        // summary: this.character.summary,
-        // biography: this.character.biography,
-        // national_identity: this.character.national_identity,
+        identifiers,
+        classification,
+        parent,
+        children,
+        abstract,
+        description,
+        founding_date,
+        dissolution_date,
+        image,
+        contact_details,
+        links,
+        speeches,
+      } = this.organization;
+
+      // commit to graphQL
+      await graphql(ADD_ORGANIZATION, {
+        name: name.value,
+        alternative_name: alternative_name.value,
+        identifiers: identifiers.value,
+        classification: classification.value,
+        parent: parent.value,
+        children: children.value,
+        abstract: abstract.value,
+        description: description.value,
+        founding_date: founding_date.value,
+        dissolution_date: dissolution_date.value,
+        image: image.value,
+        contact_details: contact_details.value,
+        links: links.value,
+        speeches: speeches.value,
       });
+
+      // Greet and redirect to home
+
+      alert("感謝您的幫助！");
+      this.$router.push("/");
     },
   },
 };

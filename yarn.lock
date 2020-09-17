@@ -3757,10 +3757,10 @@ boom@7.x.x:
   dependencies:
     hoek "6.x.x"
 
-bootstrap-vue@^2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.17.0.tgz#ecff2823cd80f8673f0084091dc54498164cc5fb"
-  integrity sha512-cYeoVTxAP0koMseCwSl4KQgcdm2M6COfn3F0UaecGkaWy6Vf5Jl+VjDctaR4SvkHZ693tHjW28s/icbsGtKRjQ==
+bootstrap-vue@^2.17.1:
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.17.1.tgz#be9a81609029965a2009a5f27747d335e83242e5"
+  integrity sha512-zj39bvtVRSmNbr8NmSPVqS/yZQrXHW8zeCcYnBDFRHCCY1VRSU3HWJ3eWyikd/Tq+sSMGl5TW0NQOZAHLqcDmA==
   dependencies:
     "@nuxt/opencollective" "^0.3.0"
     bootstrap ">=4.5.2 <5.0.0"
@@ -8530,7 +8530,7 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt@^2.14.4:
+nuxt@^2.14.4, nuxt@^2.14.5:
   version "2.14.5"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.14.5.tgz#d4da8ed7dd03cf199cf3981637377ab1fe682187"
   integrity sha512-VAOlQNfDdxxCdrkOAWO5ErkvhMAZHdRJVMWH+gwjIWT+yh9uAXoFxm/WZcxCnJ6jEoUgvOZ6/DFKC01T96+0pg==

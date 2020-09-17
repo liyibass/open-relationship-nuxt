@@ -80,51 +80,6 @@
 </template>
 
 <script>
-/**
-  GraphQL Queries & Mutations
-*/
-const GET_TODOS = `
-  query GetTodos {
-    allTodos {
-      name
-      id
-    }
-  }
-`;
-
-const ADD_TODO = `
-    mutation AddTodo($name: String!) {
-      createTodo(data: { name: $name }) {
-        name
-        id
-      }
-    }
-  `;
-
-const REMOVE_TODO = `
-    mutation RemoveTodo($id: ID!) {
-      deleteTodo(id: $id) {
-        name
-        id
-      }
-    }
-  `;
-
-function graphql(query, variables = {}) {
-  return fetch("http://localhost:3000/admin/api", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      variables,
-      query,
-    }),
-  }).then(function(result) {
-    return result.json();
-  });
-}
-
 export default {
   head: {
     title: "Home page",
@@ -154,37 +109,8 @@ export default {
       ],
     };
   },
-  // Get the todo items on server side
-  async asyncData() {
-    const { data } = await graphql(GET_TODOS);
-    return {
-      todos: data.allTodos,
-    };
-  },
 
-  methods: {
-    async getTodos() {
-      const { data } = await graphql(GET_TODOS);
-      this.todos = data.allTodos;
-    },
-    async addTodo() {
-      if (this.newTodo.length === 0) {
-        return;
-      }
-      // Add todo to list
-      await graphql(ADD_TODO, { name: this.newTodo });
-      // Reset the input field value
-      this.newTodo = "";
-      // Update the todo list
-      this.getTodos();
-    },
-
-    async removeTodo(id) {
-      await graphql(REMOVE_TODO, { id });
-      // Update the todo list
-      this.getTodos();
-    },
-  },
+  methods: {},
 };
 </script>
 

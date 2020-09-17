@@ -31,6 +31,7 @@ module.exports = {
     new NuxtApp({
       srcDir: "src",
       buildDir: "dist",
+      modules: ["bootstrap-vue/nuxt"], //equal to nuxt.config.js
     }),
   ],
 };
