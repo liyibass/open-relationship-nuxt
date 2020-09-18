@@ -11,7 +11,20 @@
       <div v-for="field in character" :key="field.label" class="fieldBlock">
         <h5>{{ field.label }}</h5>
         <p>{{ field.info }}</p>
-        <input :type="field.inputStatus.type" v-model="field.value" />
+
+        <div v-if="field.inputStatus.type == 'radio'" class="inputWrapper">
+          <span v-for="radio in field.inputStatus.multi" :key="radio.label">
+            <input
+              type="radio"
+              :value="radio.value"
+              v-model="field.value"
+            /><label>{{ radio.label }}</label>
+          </span>
+        </div>
+
+        <div v-else class="inputWrapper">
+          <input :type="field.inputStatus.type" v-model="field.value" />
+        </div>
       </div>
 
       <!-- <div class="fieldBlock">
@@ -91,7 +104,13 @@ export default {
           label: "人物的生理性別",
           info: "",
           value: "",
-          inputStatus: { type: "radio" },
+          inputStatus: {
+            type: "radio",
+            multi: [
+              { label: "男", value: "male" },
+              { label: "女", value: "female" },
+            ],
+          },
         },
         email: {
           label: "人物的電子信箱",
